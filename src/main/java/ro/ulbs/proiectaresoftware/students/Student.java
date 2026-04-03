@@ -1,7 +1,12 @@
 package ro.ulbs.proiectaresoftware.students;
 
-public class Student {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Student {
+    public static void main(String[] args) {
+
+    }
     private int numarMatricol;
     private String prenume;
     private String nume;
@@ -29,4 +34,16 @@ public class Student {
                 numarMatricol, prenume, nume, formatieDeStudiu);
 
     }
+
+
+
+    List<Student> listaStudenti = new ArrayList<>();
+
+
+
+
+    listaStudenti.add(new Studenti (112, "Ioan"));
+    listaStudenti.add(new Studenti (122, "Eugen"));
+
+
 }
