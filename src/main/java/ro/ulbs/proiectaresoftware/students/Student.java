@@ -3,7 +3,7 @@ package ro.ulbs.proiectaresoftware.students;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Student {
+public class   Student {
     public static void main(String[] args) {
 
     }
