@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 class Student {
     private int id;
@@ -14,9 +15,20 @@ class Student {
         this.formatieStudiu = formatieStudiu;
     }
 
-    public String getPrenume() { return prenume; }
-    public String getNume() { return nume; }
-    public String getFormatieStudiu() { return formatieStudiu; }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(prenume, student.prenume) &&
+                Objects.equals(nume, student.nume) &&
+                Objects.equals(formatieStudiu, student.formatieStudiu);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prenume, nume, formatieStudiu);
+    }
 
     @Override
     public String toString() {
@@ -27,20 +39,13 @@ class Student {
 
 public class Main {
 
-    public static boolean contineStudent(List<Student> lista, Student studentCautat) {
-        for (Student s : lista) {
-            if (s.getPrenume().equalsIgnoreCase(studentCautat.getPrenume()) &&
-                    s.getNume().equalsIgnoreCase(studentCautat.getNume()) &&
-                    s.getFormatieStudiu().equalsIgnoreCase(studentCautat.getFormatieStudiu())) {
-                return true;
-            }
-        }
-        return false;
+    public static boolean contineStudentOptimizat(Set<Student> setStudenti, Student studentCautat) {
+        return setStudenti.contains(studentCautat);
     }
 
     public static void main(String[] args) {
+        Set<Student> studenti = new HashSet<>();
 
-        List<Student> studenti = new ArrayList<>();
         studenti.add(new Student(101, "Ionut", "Ionescu", "TI21/1"));
         studenti.add(new Student(112, "Maria", "Popa", "TI21/1")); // studentul de la punctul c)
         studenti.add(new Student(103, "Andrei", "Vasile", "TI21/2"));
@@ -54,10 +59,10 @@ public class Main {
         Student studentB = new Student(120, "Alis", "Popa", "TI21/2");
         Student studentC = new Student(112, "Maria", "Popa", "TI21/1");
 
-        boolean gasitB = contineStudent(studenti, studentB);
-        System.out.println("b) Este prezent studentul Alis Popa? Răspuns: " + gasitB);
+        boolean gasitB = contineStudentOptimizat(studenti, studentB);
+        System.out.println("b) Este prezent studentul Alis Popa? (O(1)): " + gasitB);
 
-        boolean gasitC = contineStudent(studenti, studentC);
-        System.out.println("c) Este prezent studentul Maria Popa? Răspuns: " + gasitC);
+        boolean gasitC = contineStudentOptimizat(studenti, studentC);
+        System.out.println("c) Este prezent studentul Maria Popa? (O(1)): " + gasitC);
     }
 }
