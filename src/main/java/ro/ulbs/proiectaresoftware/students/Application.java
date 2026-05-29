@@ -11,8 +11,6 @@ public class Application {
         Student s4 = new Student(122, "Mihai", "Vecerdea", "TI22/1");
         Student s5 = new Student(122, "Eugen", "Uritescu", "TI22/2");
 
-
-
         System.out.println(String.format("%-15s %-15s %-15s %-15s",
                 "numar matricol", "prenume", "nume", "formatieDeStudiu"));
 
