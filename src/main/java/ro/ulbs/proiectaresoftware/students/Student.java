@@ -1,49 +1,63 @@
-package ro.ulbs.proiectaresoftware.students;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class   Student {
-    public static void main(String[] args) {
-
-    }
-    private int numarMatricol;
+class Student {
+    private int id;
     private String prenume;
     private String nume;
-    private String formatieDeStudiu;
+    private String formatieStudiu;
 
-
-    public Student(int numarMatricol, String prenume, String nume, String formatieDeStudiu) {
-        this.numarMatricol = numarMatricol;
+    public Student(int id, String prenume, String nume, String formatieStudiu) {
+        this.id = id;
         this.prenume = prenume;
         this.nume = nume;
-        this.formatieDeStudiu = formatieDeStudiu;
+        this.formatieStudiu = formatieStudiu;
     }
 
-
-    public int getNumarMatricol() { return numarMatricol; }
     public String getPrenume() { return prenume; }
     public String getNume() { return nume; }
-    public String getFormatieDeStudiu() { return formatieDeStudiu; }
-
+    public String getFormatieStudiu() { return formatieStudiu; }
 
     @Override
     public String toString() {
+        return "Student{" + "id=" + id + ", prenume='" + prenume + '\'' +
+                ", nume='" + nume + '\'' + ", formatieStudiu='" + formatieStudiu + '\'' + '}';
+    }
+}
 
-        return String.format("%-15d %-15s %-15s %-15s",
-                numarMatricol, prenume, nume, formatieDeStudiu);
+public class Main {
 
+    public static boolean contineStudent(List<Student> lista, Student studentCautat) {
+        for (Student s : lista) {
+            if (s.getPrenume().equalsIgnoreCase(studentCautat.getPrenume()) &&
+                    s.getNume().equalsIgnoreCase(studentCautat.getNume()) &&
+                    s.getFormatieStudiu().equalsIgnoreCase(studentCautat.getFormatieStudiu())) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    public static void main(String[] args) {
 
+        List<Student> studenti = new ArrayList<>();
+        studenti.add(new Student(101, "Ionut", "Ionescu", "TI21/1"));
+        studenti.add(new Student(112, "Maria", "Popa", "TI21/1")); // studentul de la punctul c)
+        studenti.add(new Student(103, "Andrei", "Vasile", "TI21/2"));
 
-    List<Student> listaStudenti = new ArrayList<>();
+        System.out.println("--- Lista de studenți (for-each) ---");
+        for (Student s : studenti) {
+            System.out.println(s);
+        }
+        System.out.println("------------------------------------\n");
 
+        Student studentB = new Student(120, "Alis", "Popa", "TI21/2");
+        Student studentC = new Student(112, "Maria", "Popa", "TI21/1");
 
+        boolean gasitB = contineStudent(studenti, studentB);
+        System.out.println("b) Este prezent studentul Alis Popa? Răspuns: " + gasitB);
 
-
-    listaStudenti.add(new Studenti (112, "Ioan"));
-    listaStudenti.add(new Studenti (122, "Eugen"));
-
-
+        boolean gasitC = contineStudent(studenti, studentC);
+        System.out.println("c) Este prezent studentul Maria Popa? Răspuns: " + gasitC);
+    }
 }
